@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venis Fishing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --bg-dark: #050914; /* Sâu hơn, đen hơn */
+            --bg-card: rgba(16, 24, 43, 0.6);
+            --text-main: #E0E6ED;
+            --neon-gold: #F1C40F;
+            --neon-cyan: #00F3FF;
+            --accent-coral: #E67E22;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            font-family: 'Rajdhani', sans-serif; 
+            font-size: 1.1rem;
+            line-height: 1.6; 
+            overflow-x: hidden; 
+        }
+
+        /* Áp dụng font Gaming cho các Tiêu đề */
+        h1, h2, h3, .logo, .btn, .cmd-name { 
+            font-family: 'Orbitron', sans-serif; 
+        }
+
+        /* --- Hoạt ảnh dùng chung (Keyframes) --- */
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px rgba(241, 196, 15, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(241, 196, 15, 0.9); }
+            100% { box-shadow: 0 0 10px rgba(241, 196, 15, 0.5); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Lớp học ẩn nội dung để JavaScript kích hoạt khi cuộn (Scroll Animation) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 50px; background-color: rgba(5, 9, 20, 0.85);
+            backdrop-filter: blur(10px);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+        }
+        .logo { 
+            font-size: 24px; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 2px; 
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+        .logo span { color: var(--neon-cyan); }
+        
+        .nav-links { list-style: none; display: flex; gap: 30px; }
+        .nav-links a { 
+            color: var(--text-main); text-decoration: none; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s; 
+        }
+        .nav-links a:hover { 
+            color: var(--neon-cyan); 
+            text-shadow: 0 0 8px var(--neon-cyan); 
+        }
+        
+        .menu-toggle { display: none; font-size: 28px; cursor: pointer; color: var(--neon-cyan); user-select: none; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(to bottom, rgba(5, 9, 20, 0.6), var(--bg-dark)), 
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop') center/cover;
+            position: relative;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 20%, #050914 80%);
+            z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 2; }
+
+        .hero h1 { 
+            font-size: 4rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 3px; 
+            text-shadow: 0 0 20px rgba(0,0,0,1); 
+        }
+        .hero h1 span { color: var(--neon-gold); text-shadow: 0 0 15px var(--neon-gold); }
+        .hero p { font-size: 1.4rem; max-width: 700px; margin: 0 auto 40px auto; color: #b8c6db; font-weight: 500; }
+        
+        .btn-group { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .btn { 
+            padding: 15px 35px; border-radius: 4px; font-size: 1.1rem; font-weight: 700; 
+            text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;
+        }
+        .btn-primary { 
+            background-color: transparent; color: var(--neon-gold); 
+            border: 2px solid var(--neon-gold);
+            animation: pulseGlow 2s infinite;
+        }
+        .btn-primary:hover { 
+            background-color: var(--neon-gold); color: var(--bg-dark); 
+            box-shadow: 0 0 30px var(--neon-gold); transform: scale(1.05);
+        }
+        .btn-secondary { 
+            background-color: rgba(0, 243, 255, 0.1); color: var(--neon-cyan); 
+            border: 2px solid var(--neon-cyan);
+        }
+        .btn-secondary:hover { 
+            background-color: var(--neon-cyan); color: var(--bg-dark); 
+            box-shadow: 0 0 20px var(--neon-cyan); transform: scale(1.05);
+        }
+
+        /* --- SHARED SECTION STYLES --- */
+        section { padding: 100px 50px; position: relative; }
+        .section-title { 
+            text-align: center; font-size: 2.8rem; margin-bottom: 60px; color: #fff; 
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+        .section-title span { color: var(--neon-cyan); }
+
+        /* --- FEATURES --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .card {
+            background-color: var(--bg-card); padding: 40px 20px; border-radius: 12px; text-align: center;
+            backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.4s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+        /* Tạo độ trễ (delay) cho hiệu ứng bay lơ lửng lệch nhau */
+        .card:nth-child(2) { animation-delay: 1s; }
+        .card:nth-child(3) { animation-delay: 2s; }
+        .card:nth-child(4) { animation-delay: 3s; }
+
+        .card:hover { 
+            transform: translateY(-15px) scale(1.03); 
+            background-color: rgba(16, 24, 43, 0.8);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2); 
+        }
+        .card .icon { font-size: 3.5rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+        .card h3 { margin-bottom: 15px; font-size: 1.5rem; color: #fff; letter-spacing: 1px; }
+        .card p { color: #A0B2C6; font-size: 1.05rem; }
+
+        /* --- COMMANDS WIKI (Console Style) --- */
+        .commands-container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .cmd-card {
+            background-color: #02040a; border: 1px solid #1f2937;
+            padding: 25px; border-radius: 8px; display: flex; flex-direction: column; justify-content: center;
+            position: relative; overflow: hidden; transition: all 0.3s;
+        }
+        .cmd-card::before {
+            content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%;
+            background-color: var(--neon-gold); transition: width 0.3s;
+        }
+        .cmd-card:hover { border-color: var(--neon-gold); box-shadow: 0 0 15px rgba(241, 196, 15, 0.2); }
+        .cmd-card:hover::before { width: 8px; box-shadow: 0 0 10px var(--neon-gold); }
+        
+        .cmd-name { font-size: 1.3rem; color: var(--neon-gold); margin-bottom: 8px; margin-left: 10px; }
+        .cmd-desc { color: #8b9bb4; font-size: 1.05rem; margin-left: 10px; }
+
+        /* --- FOOTER --- */
+        footer { 
+            background-color: #02040a; text-align: center; padding: 40px; color: #64748b; 
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        footer a { color: var(--neon-cyan); text-decoration: none; margin: 0 10px; transition: color 0.3s; }
+        footer a:hover { color: #fff; text-shadow: 0 0 8px var(--neon-cyan); }
+
+        /* --- RESPONSIVE DESIGN (MOBILE) --- */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            section { padding: 60px 20px; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .menu-toggle { display: block; } 
+            
+            .nav-links {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background-color: rgba(5, 9, 20, 0.98);
+                flex-direction: column; align-items: center; gap: 0;
+                max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+            }
+            .nav-links.active { max-height: 300px; border-bottom: 1px solid var(--neon-cyan); }
+            .nav-links li { width: 100%; text-align: center; padding: 15px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">VENIS<span>FISHING</span></a>
+        <div class="menu-toggle" id="mobile-menu">☰</div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#commands">Commands</a></li>
+            <li><a href="#">Premium</a></li>
+        </ul>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content reveal">
+            <h1>Conquer the <span>Ocean</span></h1>
+            <p>More than just fishing. Experience an ultimate Discord RPG with Blacksmithing, World Boss Raids, and a robust Guild system.</p>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Invite Venis</a>
+                <a href="#" class="btn btn-secondary">Support Server</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <h2 class="section-title reveal">Game <span>Features</span></h2>
+        <div class="grid">
+            <div class="card reveal">
+                <div class="icon">🎣</div>
+                <h3>Deep Mechanics</h3>
+                <p>Hundreds of fish species, stamina management, rare mutations, and tactical baits for the ultimate catch.</p>
+            </div>
+            <div class="card reveal">
+                <div class="icon">🔥</div>
+                <h3>The Blacksmith</h3>
+                <p>Unlock slots and enchant your rods with powerful Runes. High risk, high reward RNG system!</p>
+            </div>
+            <div class="card reveal">
+                <div class="icon">🚨</div>
+                <h3>World Boss Raids</h3>
+                <p>Unite with the server to defeat the Kraken or Leviathan. Climb the DPS leaderboard for reward.</p>
+            </div>
+            <div class="card reveal">
+                <div class="icon">🛡️</div>
+                <h3>Guild System</h3>
+                <p>Create your own Guild, donate resources, level up, and unlock exclusive passive buffs.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="commands" style="background-color: rgba(0,0,0,0.3);">
+        <h2 class="section-title reveal">Command <span>Terminal</span></h2>
+        <div class="commands-container">
+            <div class="cmd-card reveal">
+                <div class="cmd-name">/fish</div>
+                <div class="cmd-desc">Cast your line into the water. Consumes stamina.</div>
+            </div>
+            <div class="cmd-card reveal">
+                <div class="cmd-name">/blacksmith</div>
+                <div class="cmd-desc">Open the forge to unlock slots and equip Runes to your rod.</div>
+            </div>
+            <div class="cmd-card reveal">
+                <div class="cmd-name">/worldboss attack</div>
+                <div class="cmd-desc">Deal damage to the currently active global World Boss.</div>
+            </div>
+            <div class="cmd-card reveal">
+                <div class="cmd-name">/guild menu</div>
+                <div class="cmd-desc">Open your guild interface to manage members, quests, and buffs.</div>
+            </div>
+            <div class="cmd-card reveal">
+                <div class="cmd-name">/shop</div>
+                <div class="cmd-desc">Buy baits, rods, and consumables to boost your journey.</div>
+            </div>
+            <div class="cmd-card reveal">
+                <div class="cmd-name">/bag</div>
+                <div class="cmd-desc">View your inventory, fishes, chests, and runes.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Venis Bot. All rights reserved.</p>
+        <p style="margin-top: 15px;">
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Contact Us</a>
+        </p>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            if(navLinks.classList.contains('active')) {
+                mobileMenu.innerHTML = '✕';
+            } else {
+                mobileMenu.innerHTML = '☰';
+            }
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenu.innerHTML = '☰';
+            });
+        });
+
+        // 2. Scroll Reveal Animation (Intersection Observer)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100; // Khoảng cách (px) trước khi phần tử hiện ra
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        // Gọi hàm một lần khi load trang để hiện phần Hero ngay
+        window.addEventListener("load", reveal);
+        // Gọi hàm mỗi khi cuộn chuột
+        window.addEventListener("scroll", reveal);
+    </script>
+
+</body>
+</html>
