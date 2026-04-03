@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Venis Fishing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Variables (Giữ nguyên từ Landing Page) */
+        :root {
+            --bg-dark: #050914; 
+            --bg-card: rgba(16, 24, 43, 0.6);
+            --text-main: #E0E6ED;
+            --neon-gold: #F1C40F;
+            --neon-cyan: #00F3FF;
+            --accent-coral: #E67E22;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            font-family: 'Rajdhani', sans-serif; 
+            font-size: 1.1rem;
+            line-height: 1.6; 
+            overflow-x: hidden; 
+        }
+
+        h1, h2, h3, .logo, .btn { 
+            font-family: 'Orbitron', sans-serif; 
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 50px; background-color: rgba(5, 9, 20, 0.85);
+            backdrop-filter: blur(10px);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+        }
+        .logo { 
+            font-size: 24px; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 2px; 
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+        .logo span { color: var(--neon-cyan); }
+        
+        .nav-links { list-style: none; display: flex; gap: 30px; }
+        .nav-links a { 
+            color: var(--text-main); text-decoration: none; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s; 
+        }
+        .nav-links a:hover { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
+        .menu-toggle { display: none; font-size: 28px; cursor: pointer; color: var(--neon-cyan); user-select: none; }
+
+        /* --- LEGAL SECTION STYLES --- */
+        .legal-section {
+            padding: 150px 20px 100px 20px; /* Bù khoảng trống cho fixed header */
+            min-height: calc(100vh - 100px);
+            background: radial-gradient(circle at top, rgba(0, 243, 255, 0.05) 0%, var(--bg-dark) 70%);
+        }
+        
+        .section-title { 
+            text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: #fff; 
+            text-shadow: 0 0 10px rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px;
+        }
+        .section-title span { color: var(--neon-cyan); }
+
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            padding: 50px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .legal-container h2 {
+            color: var(--neon-gold);
+            font-size: 1.5rem;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(241, 196, 15, 0.2);
+            padding-bottom: 5px;
+        }
+
+        .legal-container p {
+            color: #A0B2C6;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .legal-container ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+            color: #A0B2C6;
+        }
+
+        .legal-container li {
+            margin-bottom: 8px;
+        }
+
+        .legal-container strong {
+            color: #fff;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #64748b;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        /* --- FOOTER --- */
+        footer { 
+            background-color: #02040a; text-align: center; padding: 40px; color: #64748b; 
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        footer a { color: var(--neon-cyan); text-decoration: none; margin: 0 10px; transition: color 0.3s; }
+        footer a:hover { color: #fff; text-shadow: 0 0 8px var(--neon-cyan); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            .menu-toggle { display: block; } 
+            .nav-links {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background-color: rgba(5, 9, 20, 0.98);
+                flex-direction: column; align-items: center; gap: 0;
+                max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+            }
+            .nav-links.active { max-height: 300px; border-bottom: 1px solid var(--neon-cyan); }
+            .nav-links li { width: 100%; text-align: center; padding: 15px 0; }
+            .legal-container { padding: 30px 20px; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">VENIS<span>FISHING</span></a>
+        <div class="menu-toggle" id="mobile-menu">☰</div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#commands">Commands</a></li>
+            <li><a href="#">Premium</a></li>
+        </ul>
+    </header>
+
+    <section class="legal-section">
+        <h1 class="section-title">Terms of <span>Service</span></h1>
+        
+        <div class="legal-container">
+            <div class="last-updated">Last Updated: April 2026</div>
+
+            <p>Welcome to Venis Fishing! By inviting the Venis Fishing bot to your Discord server or using its features, you agree to comply with and be bound by the following Terms of Service. Please review them carefully.</p>
+
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing or using the Venis Fishing Discord bot ("the Bot"), you agree to be bound by these Terms of Service. If you do not agree to these terms, you may not use the Bot and must remove it from your servers.</p>
+
+            <h2>2. User Conduct & Fair Play</h2>
+            <p>To ensure a fair and enjoyable experience for all players, you agree <strong>NOT</strong> to engage in the following activities:</p>
+            <ul>
+                <li><strong>Automation:</strong> Using userbots, macros, auto-clickers, or any third-party scripts to automate commands (e.g., auto-fishing, auto-battling).</li>
+                <li><strong>Exploiting:</strong> Intentionally abusing bugs, glitches, or loopholes to gain an unfair advantage. If you find a bug, you must report it to our support server.</li>
+                <li><strong>Real Money Trading (RMT):</strong> Selling, trading, or buying in-game currency, items, or accounts for real-world money.</li>
+                <li><strong>Spamming:</strong> Flooding chat with bot commands in a way that disrupts Discord's API or degrades the experience for others.</li>
+            </ul>
+
+            <h2>3. Virtual Currency and Items</h2>
+            <p>All in-game assets, including but not limited to coins, gems, fish, and blacksmith materials, are virtual items tied to your Discord account. They hold no real-world monetary value and cannot be redeemed for cash or transferred outside the Bot's ecosystem. We reserve the right to modify, balance, or reset game data if absolutely necessary.</p>
+
+            <h2>4. Availability of Service</h2>
+            <p>We strive to keep Venis Fishing online 24/7, but the Bot is provided on an "as is" and "as available" basis. We do not guarantee uninterrupted uptime. The service may be temporarily suspended for maintenance, updates, or due to circumstances beyond our control (e.g., Discord API outages).</p>
+
+            <h2>5. Moderation and Termination</h2>
+            <p>We reserve the right to permanently or temporarily suspend your access to the Bot, without prior notice, if we determine that you have violated any of these terms. Account wipes or blacklists are at the sole discretion of the Venis Fishing developer team.</p>
+
+            <h2>6. Liability Limitation</h2>
+            <p>In no event shall the developers or owners of Venis Fishing be held liable for any direct, indirect, incidental, or consequential damages resulting from your use of, or inability to use, the Bot.</p>
+
+            <h2>7. Changes to Terms</h2>
+            <p>We reserve the right to modify these Terms of Service at any time. Significant changes will be announced in our Support Server. Continued use of the Bot after changes indicates your acceptance of the updated terms.</p>
+
+            <h2>8. Contact Us</h2>
+            <p>If you have any questions or concerns regarding these Terms of Service, please join our official <strong>Support Server</strong> and open a ticket, or reach out to the developer team directly.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Venis Bot. All rights reserved.</p>
+        <p style="margin-top: 15px;">
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Contact Us</a>
+        </p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle logic
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            if(navLinks.classList.contains('active')) {
+                mobileMenu.innerHTML = '✕';
+            } else {
+                mobileMenu.innerHTML = '☰';
+            }
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenu.innerHTML = '☰';
+            });
+        });
+    </script>
+
+</body>
+</html>

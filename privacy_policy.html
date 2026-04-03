@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Venis Fishing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --bg-dark: #050914; 
+            --bg-card: rgba(16, 24, 43, 0.6);
+            --text-main: #E0E6ED;
+            --neon-gold: #F1C40F;
+            --neon-cyan: #00F3FF;
+            --accent-coral: #E67E22;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            font-family: 'Rajdhani', sans-serif; 
+            font-size: 1.1rem;
+            line-height: 1.6; 
+            overflow-x: hidden; 
+        }
+
+        h1, h2, h3, .logo, .btn { 
+            font-family: 'Orbitron', sans-serif; 
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 50px; background-color: rgba(5, 9, 20, 0.85);
+            backdrop-filter: blur(10px);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+        }
+        .logo { 
+            font-size: 24px; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 2px; 
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+        .logo span { color: var(--neon-cyan); }
+        
+        .nav-links { list-style: none; display: flex; gap: 30px; }
+        .nav-links a { 
+            color: var(--text-main); text-decoration: none; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s; 
+        }
+        .nav-links a:hover { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
+        .menu-toggle { display: none; font-size: 28px; cursor: pointer; color: var(--neon-cyan); user-select: none; }
+
+        /* --- LEGAL SECTION STYLES --- */
+        .legal-section {
+            padding: 150px 20px 100px 20px; 
+            min-height: calc(100vh - 100px);
+            background: radial-gradient(circle at top, rgba(0, 243, 255, 0.05) 0%, var(--bg-dark) 70%);
+        }
+        
+        .section-title { 
+            text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: #fff; 
+            text-shadow: 0 0 10px rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px;
+        }
+        .section-title span { color: var(--neon-cyan); }
+
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            padding: 50px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .legal-container h2 {
+            color: var(--neon-gold);
+            font-size: 1.5rem;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(241, 196, 15, 0.2);
+            padding-bottom: 5px;
+        }
+
+        .legal-container p {
+            color: #A0B2C6;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .legal-container ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+            color: #A0B2C6;
+        }
+
+        .legal-container li {
+            margin-bottom: 8px;
+        }
+
+        .legal-container strong {
+            color: #fff;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #64748b;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        /* --- FOOTER --- */
+        footer { 
+            background-color: #02040a; text-align: center; padding: 40px; color: #64748b; 
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        footer a { color: var(--neon-cyan); text-decoration: none; margin: 0 10px; transition: color 0.3s; }
+        footer a:hover { color: #fff; text-shadow: 0 0 8px var(--neon-cyan); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            .menu-toggle { display: block; } 
+            .nav-links {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background-color: rgba(5, 9, 20, 0.98);
+                flex-direction: column; align-items: center; gap: 0;
+                max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+            }
+            .nav-links.active { max-height: 300px; border-bottom: 1px solid var(--neon-cyan); }
+            .nav-links li { width: 100%; text-align: center; padding: 15px 0; }
+            .legal-container { padding: 30px 20px; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">VENIS<span>FISHING</span></a>
+        <div class="menu-toggle" id="mobile-menu">☰</div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#commands">Commands</a></li>
+            <li><a href="#">Premium</a></li>
+        </ul>
+    </header>
+
+    <section class="legal-section">
+        <h1 class="section-title">Privacy <span>Policy</span></h1>
+        
+        <div class="legal-container">
+            <div class="last-updated">Last Updated: April 2026</div>
+
+            <p>Your privacy is important to us. This Privacy Policy explains how the Venis Fishing Discord bot ("the Bot") collects, uses, and protects your information when you use our services. By using the Bot, you consent to the data practices described in this policy.</p>
+
+            <h2>1. Data We Collect</h2>
+            <p>To provide a functioning RPG experience, the Bot collects and stores the following minimal data:</p>
+            <ul>
+                <li><strong>User IDs:</strong> Your unique Discord User ID to create and manage your in-game profile, inventory, and stats.</li>
+                <li><strong>Guild (Server) IDs:</strong> The ID of the server where the Bot is used, for server-specific features like Guilds, World Boss leaderboards, and settings.</li>
+                <li><strong>Game Progression Data:</strong> Information generated by playing the game, such as your virtual currency, fish caught, equipped items, and experience points.</li>
+            </ul>
+            <p><strong>Note:</strong> We do <strong>NOT</strong> collect, read, or store the contents of your messages. We only process commands explicitly directed at the Bot (via slash commands or specific prefixes).</p>
+
+            <h2>2. How We Use Your Data</h2>
+            <p>The collected data is used exclusively for the core functionality of the Bot, including:</p>
+            <ul>
+                <li>Saving and loading your game progress.</li>
+                <li>Displaying leaderboards and statistics.</li>
+                <li>Troubleshooting bugs and providing customer support.</li>
+                <li>Preventing abuse, exploits, and enforcing our Terms of Service.</li>
+            </ul>
+
+            <h2>3. Data Sharing and Disclosure</h2>
+            <p>We believe your data belongs to you. We <strong>do not</strong> sell, rent, or trade your data to third parties. Data is only accessible to the core development team for maintenance and moderation purposes.</p>
+
+            <h2>4. Data Retention and Deletion</h2>
+            <p>Your data is kept as long as you are actively using the Bot. If you wish to have your data permanently deleted from our database, you can do so by:</p>
+            <ul>
+                <li>Using the in-game data deletion command (if available).</li>
+                <li>Joining our Support Server and submitting a formal data deletion request ticket to the developers.</li>
+            </ul>
+            <p>Once deleted, your game progress cannot be recovered.</p>
+
+            <h2>5. Security</h2>
+            <p>We take reasonable measures to protect your data against unauthorized access or destruction. Our database is secured, and access is strictly limited. However, please remember that no method of electronic storage on the internet is 100% secure.</p>
+
+            <h2>6. Changes to this Policy</h2>
+            <p>We may update this Privacy Policy periodically to reflect changes in our practices or Discord's Developer Terms. Any significant updates will be communicated through our official Support Server.</p>
+
+            <h2>7. Contact Us</h2>
+            <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us by joining the official <strong>Venis Fishing Support Server</strong> on Discord.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Venis Bot. All rights reserved.</p>
+        <p style="margin-top: 15px;">
+            <a href="tos.html">Terms of Service</a> | 
+            <a href="privacy.html">Privacy Policy</a> |
+            <a href="#">Contact Us</a>
+        </p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle logic
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            if(navLinks.classList.contains('active')) {
+                mobileMenu.innerHTML = '✕';
+            } else {
+                mobileMenu.innerHTML = '☰';
+            }
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenu.innerHTML = '☰';
+            });
+        });
+    </script>
+
+</body>
+</html>
